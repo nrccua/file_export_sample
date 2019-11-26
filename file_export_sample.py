@@ -41,6 +41,7 @@ if "sessionToken" not in response_json:
 # set the authorization header and organization for the rest of the session
 session.headers.update({"Authorization": f"JWT {response_json['sessionToken']}"})
 
+# payload to return list of files
 get_exports_payload = {"status": "NotDelivered", "productKey": "score-reporter"}
 response_json = session.get(
     f"{URL}/datacenter/exports", params=get_exports_payload, headers={"Organization": ORGANIZATION_UID},
@@ -51,6 +52,7 @@ files_to_download = []
 for export in response_json:
     if "uid" in export:
         export_uid = export["uid"]
+        # api route for download
         file_export_url = f"{URL}/datacenter/exports/{export_uid}/download"
         export_response_json = session.get(file_export_url, headers={"Organization": ORGANIZATION_UID}).json()
         if "downloadUrl" in export_response_json:
