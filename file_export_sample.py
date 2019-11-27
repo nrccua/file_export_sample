@@ -12,7 +12,8 @@ API_KEY = "va13sujZ9w6P96FYvP7lj1GLeC0fEsLp6NNuV1HP"
 # SET YOUR ORG UID
 ORGANIZATION_UID = "0ec47cfc-a5cd-4dc8-b27b-3fca9f393d8f"
 # override this if you want
-DOWNLOAD_DIR = Path(os.path.dirname(__file__))
+DOWNLOAD_DIR = os.path.dirname(__file__)
+DOWNLOAD_DIR = Path(DOWNLOAD_DIR)
 # SET USERNAME
 USERNAME = ""
 # SET PASSWORD
@@ -38,7 +39,7 @@ response_json = session.post(f"{URL}/login", data=json.dumps(payload)).json()
 if "sessionToken" not in response_json:
     print(f"Couldn't find sessionToken in response json:\n {response_json}")
 
-# set the authorization header and organization for the rest of the session
+# set the authorization header for the rest of the session
 session.headers.update({"Authorization": f"JWT {response_json['sessionToken']}"})
 
 # payload to return list of files
@@ -69,7 +70,7 @@ else:
         print(f"Downloading file from url {file}")
         # don't use the session here
         download_file_response = requests.get(file, allow_redirects=True, stream=True)
-        if not download_file_response.ok:
+        if download_file_response.ok:
             print(f"Writing file to {download_path}.")
             with open(download_path, "wb") as f:
                 # we are going to chunk the download because we don't know how large the files are
