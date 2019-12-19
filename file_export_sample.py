@@ -6,7 +6,7 @@ from urllib.parse import urlparse, unquote
 from pathlib import Path
 
 # SET THE API URL
-URL = "https://api.test-datalab.nrccua.org/v1"
+URL = "https://api.datalab.nrccua.org/v1"
 # SET YOUR API KEY
 API_KEY = "va13sujZ9w6P96FYvP7lj1GLeC0fEsLp6NNuV1HP"
 # SET YOUR ORG UID
