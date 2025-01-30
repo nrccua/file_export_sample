@@ -40,7 +40,7 @@ if "sessionToken" not in response_json:
     print(f"Couldn't find sessionToken in response json:\n {response_json}")
 
 # set the authorization header for the rest of the session
-session.headers.update({"Authorization": f"JWT {response_json['sessionToken']}"})
+session.headers.update({"Authorization": f"Bearer {response_json['sessionToken']}"})
 
 # payload to return list of files
 get_exports_payload = {"status": "NotDelivered", "productKey": "score-reporter"}
